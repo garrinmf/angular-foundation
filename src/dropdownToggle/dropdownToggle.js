@@ -33,6 +33,8 @@ angular.module('mm.foundation.dropdownToggle', [ 'mm.foundation.position', 'mm.f
       };
 
       var onClick = function (event) {
+        var windowWidth = $window.innerWidth;
+
         dropdown = angular.element($document[0].querySelector(attrs.dropdownToggle));
         var elementWasOpen = (element === openElement);
 
@@ -88,7 +90,11 @@ angular.module('mm.foundation.dropdownToggle', [ 'mm.foundation.position', 'mm.f
           openElement = element;
 
           closeMenu = function (event) {
+            if (event && event.type == 'resize' && event.target.innerWidth == windowWidth) {
+              return;
+            }
             $document.off('click', closeMenu);
+            angular.element($window).unbind('resize', closeMenu);
             dropdown.css('display', 'none');
             element.removeClass('expanded');
             closeMenu = angular.noop;
@@ -98,6 +104,7 @@ angular.module('mm.foundation.dropdownToggle', [ 'mm.foundation.position', 'mm.f
             }
           };
           $document.on('click', closeMenu);
+          angular.element($window).bind('resize', closeMenu);
         }
       };
 
