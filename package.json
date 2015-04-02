@@ -3,6 +3,7 @@
   "name": "angular-mm-foundation",
   "version": "0.7.0-SNAPSHOT",
   "homepage": "http://pineconellc.github.io/angular-foundation/",
+  "main": "./dist/mm-foundation-tpls.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/pineconellc/angular-foundation.git"
